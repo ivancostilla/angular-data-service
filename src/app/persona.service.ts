@@ -24,13 +24,16 @@ export class PersonasService {
     //devolvemos la persona ubicada en el index que enviamos
     let persona: Persona = this.personas[index];
     return persona;
-  }
+  };
 
   modificarPersona(index:number,persona:Persona){
     //editar persona q ya existe
     let persona1 = this.personas[index];
     persona1.nombre = persona.nombre;
     persona1.apellido = persona.apellido;
-  }
+  };
 
+  eliminarPersona(index:number){
+    this.personas.splice(index,1);
+  };
 }
