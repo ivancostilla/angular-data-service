@@ -16,7 +16,12 @@ export class FormularioComponent  {
   @ViewChild('apellidoInput') apellidoInput: ElementRef;
 
   constructor(private loggingService:LoggingService,
-    private personaService:PersonasService){}
+    private personaService:PersonasService){
+  //comunicacion entre componentes usando servicios:
+      this.personaService.saludar.subscribe( (indice: number) => {
+        alert(indice)
+      })
+    }
 
   agregarPersona(){
     let persona1 = new Persona(
