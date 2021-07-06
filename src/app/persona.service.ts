@@ -14,8 +14,23 @@ export class PersonasService {
   saludar = new EventEmitter<number>();
   //inyeccion de servicios dentro de otros servicios
   constructor(private LoggingService: LoggingService){}
+
   agregarPersona(persona: Persona) {
     this.LoggingService.enviaMensajeAConsola('agregamos persona :' + persona.nombre+ " " + persona.apellido)
     this.personas.push(persona);
+  };
+
+  encontrarPersona(index:number){
+    //devolvemos la persona ubicada en el index que enviamos
+    let persona: Persona = this.personas[index];
+    return persona;
   }
+
+  modificarPersona(index:number,persona:Persona){
+    //editar persona q ya existe
+    let persona1 = this.personas[index];
+    persona1.nombre = persona.nombre;
+    persona1.apellido = persona.apellido;
+  }
+
 }
