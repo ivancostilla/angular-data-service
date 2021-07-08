@@ -13,9 +13,10 @@ export class PersonasComponent implements OnInit {
 
   personas: Persona[] = [];
 
-  constructor(private loggingService:LoggingService,
-              private personasService: PersonasService,
-              private router:Router
+  constructor(
+    private loggingService:LoggingService,
+    private personasService: PersonasService,
+    private router:Router,
   ){}
 
   ngOnInit(): void {

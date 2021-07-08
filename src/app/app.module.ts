@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,6 +11,7 @@ import { PersonasService } from './persona.service';
 import { AppRoutingModule } from './app-routing.module';
 import { PersonasComponent } from './personas/personas.component';
 import { ErrorComponent } from './error/error.component';
+import { DataServices } from './data.services';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import { ErrorComponent } from './error/error.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [LoggingService, PersonasService],
+  providers: [LoggingService, PersonasService, DataServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

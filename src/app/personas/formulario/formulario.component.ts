@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataServices } from 'src/app/data.services';
 import { LoggingService } from '../../LoggingService.service';
 import { Persona } from '../../persona.model';
 import { PersonasService } from '../../persona.service';
@@ -15,10 +16,11 @@ export class FormularioComponent implements OnInit  {
   apellidoInput:string;
   index:number;
   modoEdicion:number;
-  constructor(private loggingService:LoggingService,
+  constructor(
+    private loggingService:LoggingService,
     private personaService:PersonasService,
     private router:Router,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
     ){
   //comunicacion entre componentes usando servicios:
       this.personaService.saludar.subscribe( (indice: number) => {
