@@ -17,7 +17,9 @@ export class DataServices{
 
     //guardar personas
     guardarPersonas(personas: Persona[]){
-      this.httpClient.put('https://angular-8d501-default-rtdb.firebaseio.com/datos.json',personas)
+      const token = this.loginService.getToken();
+
+      this.httpClient.put('https://angular-8d501-default-rtdb.firebaseio.com/datos.json?auth=' + token ,personas)
       .subscribe(
         (response) => {
           console.log(response)
@@ -29,8 +31,10 @@ export class DataServices{
     }
 
     modificarPersona(index:number, persona:Persona){
+      const token = this.loginService.getToken();
+
       let url: string;
-      url = 'https://angular-8d501-default-rtdb.firebaseio.com' + '/datos/' + index + '.json';
+      url = 'https://angular-8d501-default-rtdb.firebaseio.com' + '/datos/' + index + '.json?auth=' + token;
       console.log("url de modificarPersona:" + url);
       this.httpClient.put( url, persona)
           .subscribe(
@@ -42,8 +46,9 @@ export class DataServices{
     }
 
     eliminarPersona(index:number){
+      const token = this.loginService.getToken();
       let url: string;
-      url = 'https://angular-8d501-default-rtdb.firebaseio.com' + '/datos/' + index + '.json';
+      url = 'https://angular-8d501-default-rtdb.firebaseio.com' + '/datos/' + index + '.json?auth=' + token;
       console.log("url de eliminarPersona:" + url);
       this.httpClient.delete( url)
           .subscribe(
