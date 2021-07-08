@@ -20,7 +20,16 @@ export class PersonasComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.personas = this.personasService.personas;
+    //recupera las personas para mostrarlas al iniciar:
+    // this.personas = this.personasService.personas;
+
+    this.personasService.obtenerPersonas()
+    .subscribe(
+      (personas: Persona[]) => {
+        this.personas = personas;
+        this.personasService.setPersonas(personas)
+      }
+    )
   }
   agregar(){
     this.router.navigate(['personas/agregar'])

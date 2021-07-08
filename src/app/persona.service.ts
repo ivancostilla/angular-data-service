@@ -6,10 +6,7 @@ import { DataServices } from './data.services';
 //para injectar 1 servicio dntro de otro:
 @Injectable()
 export class PersonasService {
-  personas: Persona[] = [
-    new Persona('Juan', 'Perez'),
-    new Persona('Laura', 'Juarez'),
-  ];
+  personas: Persona[] = [];
 
   //comunicacion entre componentes usando servicios
   saludar = new EventEmitter<number>();
@@ -19,8 +16,19 @@ export class PersonasService {
     private dataServices: DataServices,
     ){}
 
+  setPersonas(personas: Persona[]){
+    this.personas = personas;
+  }
+  obtenerPersonas(){
+    return this.dataServices.cargarPersonas()
+  }
   agregarPersona(persona: Persona) {
     this.LoggingService.enviaMensajeAConsola('agregamos persona :' + persona.nombre+ " " + persona.apellido)
+    //por si el arreglo no tiene datos en la bbdd lo iniciamos vacio y
+    //evitamos el error null
+    if(this.personas == null){
+      this.personas = []
+    }
     this.personas.push(persona);
     this.dataServices.guardarPersonas(this.personas)
 

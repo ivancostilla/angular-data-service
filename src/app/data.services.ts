@@ -8,6 +8,9 @@ export class DataServices{
   constructor(
     private httpClient: HttpClient
     ){}
+    cargarPersonas(){
+      return this.httpClient.get<Persona[]>('https://angular-8d501-default-rtdb.firebaseio.com/datos.json');
+    }
     //guardar personas
     guardarPersonas(personas: Persona[]){
       this.httpClient.put('https://angular-8d501-default-rtdb.firebaseio.com/datos.json',personas)
