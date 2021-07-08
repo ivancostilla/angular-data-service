@@ -1,3 +1,4 @@
+import { LoginService } from './login/login.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Persona } from './persona.model';
@@ -5,10 +6,15 @@ import { Persona } from './persona.model';
 @Injectable()
 
 export class DataServices{
-  constructor(private httpClient: HttpClient){}
+  constructor(private httpClient: HttpClient,
+    private loginService: LoginService){}
+
     cargarPersonas(){
-      return this.httpClient.get<Persona[]>('https://angular-8d501-default-rtdb.firebaseio.com/datos.json');
+      //enviamos el token a la bbdd para que nos muestre la info
+      const token = this.loginService.getToken();
+      return this.httpClient.get<Persona[]>('https://angular-8d501-default-rtdb.firebaseio.com/datos.json?auth=' + token);
     }
+
     //guardar personas
     guardarPersonas(personas: Persona[]){
       this.httpClient.put('https://angular-8d501-default-rtdb.firebaseio.com/datos.json',personas)
@@ -34,7 +40,7 @@ export class DataServices{
               (error) => console.log("Error en modificar Persona: " + error)
           );
     }
-    
+
     eliminarPersona(index:number){
       let url: string;
       url = 'https://angular-8d501-default-rtdb.firebaseio.com' + '/datos/' + index + '.json';
