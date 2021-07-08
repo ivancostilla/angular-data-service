@@ -1,0 +1,10 @@
+como preparar el proyecto para produccion en angualr
+0-entrar en la consola a la ruta del proyecto.
+1- en consola colocar: ng build --prod --aot
+2-se genera la carpeta dist
+
+//si vamos a desplegar el proyecto dentro de una carpeta hay que compilar asi:
+1-bis: ng build --prod --aot --base-href /nombreDeLaCarpeta/
+
+//sitio desplegado en:
+https://angular-8d501.web.app
