@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import * as firebase from 'firebase';
 @Injectable()
 export class LoginService{
+
   token: string;
 
   constructor(
@@ -34,4 +35,16 @@ export class LoginService{
     return this.token;
   }
 
+  //para saber si estamos logueados o no:
+  isAutenticado(){
+    return this.token != null;
+  }
+
+  //logOut
+  logout(){
+    firebase.default.auth().signOut().then(()=>{
+      this.token = null;
+      this.router.navigate(['login']);
+    }). catch(error => console.log(error))
+  }
 }
